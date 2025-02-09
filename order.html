@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выбор товаров</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+        .product {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .product button {
+            margin-top: 5px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #0088cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .product button:hover {
+            background-color: #005f99;
+        }
+        #checkout {
+            margin-top: 20px;
+            padding: 15px;
+            font-size: 18px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #checkout:hover {
+            background-color: #1e7e34;
+        }
+    </style>
+</head>
+<body>
+    <h1>Выберите товары</h1>
+
+    <div class="product">
+        <h3>Товар 1</h3>
+        <p>Описание товара 1</p>
+        <button onclick="addToCart('Товар 1')">Добавить в корзину</button>
+    </div>
+
+    <div class="product">
+        <h3>Товар 2</h3>
+        <p>Описание товара 2</p>
+        <button onclick="addToCart('Товар 2')">Добавить в корзину</button>
+    </div>
+
+    <div class="product">
+        <h3>Товар 3</h3>
+        <p>Описание товара 3</p>
+        <button onclick="addToCart('Товар 3')">Добавить в корзину</button>
+    </div>
+
+    <div class="product">
+        <h3>Товар 4</h3>
+        <p>Описание товара 4</p>
+        <button onclick="addToCart('Товар 4')">Добавить в корзину</button>
+    </div>
+
+    <button id="checkout" onclick="checkout()">Оформить заказ</button>
+
+    <script>
+        let cart = [];
+
+        function addToCart(item) {
+            cart.push(item);
+            alert(item + " добавлен в корзину!");
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert("Корзина пуста!");
+                return;
+            }
+
+            Telegram.WebApp.sendData(JSON.stringify(cart)); // Отправить данные в Telegram-бота
+            Telegram.WebApp.close(); // Закрыть Mini App
+        }
+    </script>
+</body>
+</html>
